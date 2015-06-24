@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<changelog>
+<changegroup operation="I" tableName="AD_Process_Access" uid="jmm-AD_Process_Access-1010316-0">
+<column name="AD_Client_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+<column name="AD_ComponentObjectUID" type="10">
+<oldValue>null</oldValue>
+<newValue>jmm-AD_Process_Access-1010316-0</newValue>
+</column>
+<column name="AD_ComponentVersion_ID" refTable="AD_ComponentVersion" type="19">
+<oldValue>null</oldValue>
+<newValue refUID="jmm-AD_ComponentVersion-1010059">1010059</newValue>
+</column>
+<column name="AD_Org_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+<column name="AD_Process_ID" refTable="AD_Process" type="30">
+<oldValue>null</oldValue>
+<newValue refUID="jmm-AD_Process-1010316">1010316</newValue>
+</column>
+<column name="AD_Role_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+<column name="Created" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 18:29:31.494</newValue>
+</column>
+<column name="CreatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+<column name="IsActive" type="20">
+<oldValue>null</oldValue>
+<newValue>Y</newValue>
+</column>
+<column name="Updated" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 18:29:31.494</newValue>
+</column>
+<column name="UpdatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+</changegroup>
+<changegroup operation="I" tableName="AD_TreeNodeMM" uid="jmm-AD_TreeNodeMM-10-1010448">
+<column name="AD_Client_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+<column name="AD_ComponentObjectUID" type="10">
+<oldValue>null</oldValue>
+<newValue>jmm-AD_TreeNodeMM-10-1010448</newValue>
+</column>
+<column name="AD_Org_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+<column name="AD_Tree_ID" refTable="AD_Tree" type="19">
+<oldValue>null</oldValue>
+<newValue refUID="CORE-AD_Tree-10">10</newValue>
+</column>
+<column name="Created" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 18:32:33.914098</newValue>
+</column>
+<column name="CreatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+<column name="IsActive" type="20">
+<oldValue>null</oldValue>
+<newValue>Y</newValue>
+</column>
+<column name="Node_ID" refTable="AD_Menu" type="18">
+<oldValue>null</oldValue>
+<newValue refUID="jmm-AD_Menu-1010448">1010448</newValue>
+</column>
+<column name="Parent_ID" refTable="AD_Menu" type="18">
+<oldValue>null</oldValue>
+<newValue refUID="jmm-AD_Menu-0">0</newValue>
+</column>
+<column name="SeqNo" type="11">
+<oldValue>null</oldValue>
+<newValue>999</newValue>
+</column>
+<column name="Updated" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 18:32:33.914098</newValue>
+</column>
+<column name="UpdatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+</changegroup>
+<changegroup operation="I" tableName="AD_Process_Access" uid="jmm-AD_Process_Access-1010316-1010076">
+<column name="AD_Client_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>1010016</newValue>
+</column>
+<column name="AD_ComponentObjectUID" type="10">
+<oldValue>null</oldValue>
+<newValue>jmm-AD_Process_Access-1010316-1010076</newValue>
+</column>
+<column name="AD_ComponentVersion_ID" refTable="AD_ComponentVersion" type="19">
+<oldValue>null</oldValue>
+<newValue refUID="jmm-AD_ComponentVersion-1010059">1010059</newValue>
+</column>
+<column name="AD_Org_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+<column name="AD_Process_ID" refTable="AD_Process" type="30">
+<oldValue>null</oldValue>
+<newValue refUID="jmm-AD_Process-1010316">1010316</newValue>
+</column>
+<column name="AD_Role_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>1010076</newValue>
+</column>
+<column name="Created" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 18:33:14.743</newValue>
+</column>
+<column name="CreatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>1010717</newValue>
+</column>
+<column name="IsActive" type="20">
+<oldValue>null</oldValue>
+<newValue>Y</newValue>
+</column>
+<column name="IsReadWrite" type="20">
+<oldValue>null</oldValue>
+<newValue>Y</newValue>
+</column>
+<column name="Updated" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 18:33:14.744</newValue>
+</column>
+<column name="UpdatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>1010717</newValue>
+</column>
+</changegroup>
+<changegroup operation="I" tableName="AD_TreeNodeMM" uid="jmm-AD_TreeNodeMM-1010115-1010448">
+<column name="AD_Client_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>1010016</newValue>
+</column>
+<column name="AD_ComponentObjectUID" type="10">
+<oldValue>null</oldValue>
+<newValue>jmm-AD_TreeNodeMM-1010115-1010448</newValue>
+</column>
+<column name="AD_Org_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+<column name="AD_Tree_ID" refTable="AD_Tree" type="19">
+<oldValue>null</oldValue>
+<newValue refUID="CORE-AD_Tree-1010115">1010115</newValue>
+</column>
+<column name="Created" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 18:33:37.33</newValue>
+</column>
+<column name="CreatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>1010717</newValue>
+</column>
+<column name="IsActive" type="20">
+<oldValue>null</oldValue>
+<newValue>Y</newValue>
+</column>
+<column name="Node_ID" refTable="AD_Menu" type="18">
+<oldValue>null</oldValue>
+<newValue refUID="jmm-AD_Menu-1010448">1010448</newValue>
+</column>
+<column name="SeqNo" type="11">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+<column name="Updated" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 18:33:37.33</newValue>
+</column>
+<column name="UpdatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>1010717</newValue>
+</column>
+</changegroup>
+<changegroup operation="M" tableName="AD_TreeNodeMM" uid="jmm-AD_TreeNodeMM-1010115-1010448">
+<column name="Parent_ID" refTable="AD_Menu" type="18">
+<oldValue>null</oldValue>
+<newValue refUID="CORE-AD_Menu-1000189">1000189</newValue>
+</column>
+</changegroup>
+<changegroup operation="M" tableName="AD_TreeNodeMM" uid="CORE-AD_TreeNodeMM-124-1010115">
+<column name="SeqNo" type="11">
+<oldValue>0</oldValue>
+<newValue>1</newValue>
+</column>
+</changegroup>
+<changegroup operation="M" tableName="AD_TreeNodeMM" uid="CORE-AD_TreeNodeMM-1000268-1010115">
+<column name="SeqNo" type="11">
+<oldValue>1</oldValue>
+<newValue>2</newValue>
+</column>
+</changegroup>
+<changegroup operation="M" tableName="AD_TreeNodeMM" uid="CORE-AD_TreeNodeMM-1000271-1010115">
+<column name="SeqNo" type="11">
+<oldValue>2</oldValue>
+<newValue>3</newValue>
+</column>
+</changegroup>
+<changegroup operation="M" tableName="AD_TreeNodeMM" uid="CORE-AD_TreeNodeMM-1000270-1010115">
+<column name="SeqNo" type="11">
+<oldValue>3</oldValue>
+<newValue>4</newValue>
+</column>
+</changegroup>
+<changegroup operation="M" tableName="AD_TreeNodeMM" uid="CORE-AD_TreeNodeMM-1010323-1010115">
+<column name="SeqNo" type="11">
+<oldValue>4</oldValue>
+<newValue>5</newValue>
+</column>
+</changegroup>
+<changegroup operation="M" tableName="AD_TreeNodeMM" uid="LIVA2CORE-AD_TreeNodeMM-1010115-1010385-20121031201751">
+<column name="SeqNo" type="11">
+<oldValue>5</oldValue>
+<newValue>6</newValue>
+</column>
+</changegroup>
+<changegroup operation="M" tableName="AD_TreeNodeMM" uid="CORE-AD_TreeNodeMM-432-1010115">
+<column name="SeqNo" type="11">
+<oldValue>6</oldValue>
+<newValue>7</newValue>
+</column>
+</changegroup>
+<changegroup operation="M" tableName="AD_TreeNodeMM" uid="CORE-AD_TreeNodeMM-1000288-1010115">
+<column name="SeqNo" type="11">
+<oldValue>7</oldValue>
+<newValue>8</newValue>
+</column>
+</changegroup>
+<changegroup operation="M" tableName="AD_TreeNodeMM" uid="CORE-AD_TreeNodeMM-124-1010115">
+<column name="SeqNo" type="11">
+<oldValue>1</oldValue>
+<newValue>0</newValue>
+</column>
+</changegroup>
+<changegroup operation="M" tableName="AD_TreeNodeMM" uid="CORE-AD_TreeNodeMM-1000268-1010115">
+<column name="SeqNo" type="11">
+<oldValue>2</oldValue>
+<newValue>1</newValue>
+</column>
+</changegroup>
+<changegroup operation="M" tableName="AD_TreeNodeMM" uid="CORE-AD_TreeNodeMM-1000271-1010115">
+<column name="SeqNo" type="11">
+<oldValue>3</oldValue>
+<newValue>2</newValue>
+</column>
+</changegroup>
+<changegroup operation="M" tableName="AD_TreeNodeMM" uid="CORE-AD_TreeNodeMM-1000270-1010115">
+<column name="SeqNo" type="11">
+<oldValue>4</oldValue>
+<newValue>3</newValue>
+</column>
+</changegroup>
+<changegroup operation="M" tableName="AD_TreeNodeMM" uid="jmm-AD_TreeNodeMM-1010115-1010448">
+<column name="SeqNo" type="11">
+<oldValue>0</oldValue>
+<newValue>4</newValue>
+</column>
+</changegroup>
+<changegroup operation="I" tableName="C_DocType" uid="jmm-C_DocType-1010599">
+<column name="AD_Client_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>1010016</newValue>
+</column>
+<column name="AD_ComponentObjectUID" type="10">
+<oldValue>null</oldValue>
+<newValue>jmm-C_DocType-1010599</newValue>
+</column>
+<column name="AD_Org_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>1010053</newValue>
+</column>
+<column name="AllowChangePriceList" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="C_DocType_ID" type="13">
+<oldValue>null</oldValue>
+<newValue>1010599</newValue>
+</column>
+<column name="Created" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 23:02:23.412</newValue>
+</column>
+<column name="CreatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>1010717</newValue>
+</column>
+<column name="DocBaseType" type="17">
+<oldValue>null</oldValue>
+<newValue>API</newValue>
+</column>
+<column name="docsubtypeinv" type="17">
+<oldValue>null</oldValue>
+<newValue>SF</newValue>
+</column>
+<column name="DocTypeKey" type="10">
+<oldValue>null</oldValue>
+<newValue>VDM</newValue>
+</column>
+<column name="DocumentCopies" type="11">
+<oldValue>null</oldValue>
+<newValue>1</newValue>
+</column>
+<column name="DragOrderDocumentDiscounts" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="DragOrderLineDiscounts" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="DragOrderPrice" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="EnabledInPOS" type="20">
+<oldValue>null</oldValue>
+<newValue>Y</newValue>
+</column>
+<column name="EnableInCreateFromShipment" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="GL_Category_ID" refTable="GL_Category" type="19">
+<oldValue>null</oldValue>
+<newValue refUID="CORE-GL_Category-1010104">1010104</newValue>
+</column>
+<column name="HasCharges" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="HasProforma" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="IsActive" type="20">
+<oldValue>null</oldValue>
+<newValue>Y</newValue>
+</column>
+<column name="IsCheckoutPlaceRestricted" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="IsCreateCounter" type="20">
+<oldValue>null</oldValue>
+<newValue>Y</newValue>
+</column>
+<column name="IsDefault" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="IsDefaultCounterDoc" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="IsDocNoControlled" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="iselectronic" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="IsFiscal" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="IsFiscalDocument" type="20">
+<oldValue>null</oldValue>
+<newValue>Y</newValue>
+</column>
+<column name="IsInTransit" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="IsPaymentOrderSeq" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="IsPickQAConfirm" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="IsPrintAtCompleting" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="IsPrintPreview" type="20">
+<oldValue>null</oldValue>
+<newValue>Y</newValue>
+</column>
+<column name="IsReceiptSeq" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="IsShipConfirm" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="IsSOTrx" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="IsSplitWhenDifference" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="LinesCountMax" type="11">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+<column name="m_trannaturecodea_id" type="22">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+<column name="m_trannaturecodeb_id" type="22">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+<column name="Name" type="10">
+<oldValue>null</oldValue>
+<newValue>Nota de debito de proveedor</newValue>
+</column>
+<column name="POSEnableDue" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="POSEnableDueDays" type="11">
+<oldValue>null</oldValue>
+<newValue>0</newValue>
+</column>
+<column name="PrintName" type="10">
+<oldValue>null</oldValue>
+<newValue>Nota de débito</newValue>
+</column>
+<column name="signo_issotrx" type="17">
+<oldValue>null</oldValue>
+<newValue>-1</newValue>
+</column>
+<column name="Updated" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 23:02:23.412</newValue>
+</column>
+<column name="UpdatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>1010717</newValue>
+</column>
+</changegroup>
+<changegroup operation="I" tableName="C_DocType_Trl" uid="jmm-C_DocType_Trl-es_ES-1010599">
+<column name="AD_Client_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>1010016</newValue>
+</column>
+<column name="AD_ComponentObjectUID" type="10">
+<oldValue>null</oldValue>
+<newValue>jmm-C_DocType_Trl-es_ES-1010599</newValue>
+</column>
+<column name="AD_Language" refTable="AD_Language" type="18">
+<oldValue>null</oldValue>
+<newValue refUID="CORE-AD_Language-es_ES-140">es_ES</newValue>
+</column>
+<column name="AD_Org_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>1010053</newValue>
+</column>
+<column name="C_DocType_ID" refTable="C_DocType" type="19">
+<oldValue>null</oldValue>
+<newValue refUID="jmm-C_DocType-1010599">1010599</newValue>
+</column>
+<column name="Created" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 23:02:24.292</newValue>
+</column>
+<column name="CreatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>1010717</newValue>
+</column>
+<column name="IsActive" type="20">
+<oldValue>null</oldValue>
+<newValue>Y</newValue>
+</column>
+<column name="IsTranslated" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="Name" type="10">
+<oldValue>null</oldValue>
+<newValue>Nota de debito de proveedor</newValue>
+</column>
+<column name="PrintName" type="10">
+<oldValue>null</oldValue>
+<newValue>Nota de débito</newValue>
+</column>
+<column name="Updated" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 23:02:24.292</newValue>
+</column>
+<column name="UpdatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>1010717</newValue>
+</column>
+</changegroup>
+<changegroup operation="I" tableName="C_DocType_Trl" uid="jmm-C_DocType_Trl-es_AR-1010599">
+<column name="AD_Client_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>1010016</newValue>
+</column>
+<column name="AD_ComponentObjectUID" type="10">
+<oldValue>null</oldValue>
+<newValue>jmm-C_DocType_Trl-es_AR-1010599</newValue>
+</column>
+<column name="AD_Language" refTable="AD_Language" type="18">
+<oldValue>null</oldValue>
+<newValue refUID="CORE-AD_Language-es_AR-133">es_AR</newValue>
+</column>
+<column name="AD_Org_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>1010053</newValue>
+</column>
+<column name="C_DocType_ID" refTable="C_DocType" type="19">
+<oldValue>null</oldValue>
+<newValue refUID="jmm-C_DocType-1010599">1010599</newValue>
+</column>
+<column name="Created" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 23:02:24.524</newValue>
+</column>
+<column name="CreatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>1010717</newValue>
+</column>
+<column name="IsActive" type="20">
+<oldValue>null</oldValue>
+<newValue>Y</newValue>
+</column>
+<column name="IsTranslated" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="Name" type="10">
+<oldValue>null</oldValue>
+<newValue>Nota de debito de proveedor</newValue>
+</column>
+<column name="PrintName" type="10">
+<oldValue>null</oldValue>
+<newValue>Nota de débito</newValue>
+</column>
+<column name="Updated" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 23:02:24.524</newValue>
+</column>
+<column name="UpdatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>1010717</newValue>
+</column>
+</changegroup>
+<changegroup operation="I" tableName="C_DocType_Trl" uid="jmm-C_DocType_Trl-es_MX-1010599">
+<column name="AD_Client_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>1010016</newValue>
+</column>
+<column name="AD_ComponentObjectUID" type="10">
+<oldValue>null</oldValue>
+<newValue>jmm-C_DocType_Trl-es_MX-1010599</newValue>
+</column>
+<column name="AD_Language" refTable="AD_Language" type="18">
+<oldValue>null</oldValue>
+<newValue refUID="CORE-AD_Language-es_MX-143">es_MX</newValue>
+</column>
+<column name="AD_Org_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>1010053</newValue>
+</column>
+<column name="C_DocType_ID" refTable="C_DocType" type="19">
+<oldValue>null</oldValue>
+<newValue refUID="jmm-C_DocType-1010599">1010599</newValue>
+</column>
+<column name="Created" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 23:02:24.702</newValue>
+</column>
+<column name="CreatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>1010717</newValue>
+</column>
+<column name="IsActive" type="20">
+<oldValue>null</oldValue>
+<newValue>Y</newValue>
+</column>
+<column name="IsTranslated" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="Name" type="10">
+<oldValue>null</oldValue>
+<newValue>Nota de debito de proveedor</newValue>
+</column>
+<column name="PrintName" type="10">
+<oldValue>null</oldValue>
+<newValue>Nota de débito</newValue>
+</column>
+<column name="Updated" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 23:02:24.702</newValue>
+</column>
+<column name="UpdatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>1010717</newValue>
+</column>
+</changegroup>
+<changegroup operation="I" tableName="C_DocType_Trl" uid="jmm-C_DocType_Trl-es_PY-1010599">
+<column name="AD_Client_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>1010016</newValue>
+</column>
+<column name="AD_ComponentObjectUID" type="10">
+<oldValue>null</oldValue>
+<newValue>jmm-C_DocType_Trl-es_PY-1010599</newValue>
+</column>
+<column name="AD_Language" refTable="AD_Language" type="18">
+<oldValue>null</oldValue>
+<newValue refUID="CORE-AD_Language-es_PY-148">es_PY</newValue>
+</column>
+<column name="AD_Org_ID" type="19">
+<oldValue>null</oldValue>
+<newValue>1010053</newValue>
+</column>
+<column name="C_DocType_ID" refTable="C_DocType" type="19">
+<oldValue>null</oldValue>
+<newValue refUID="jmm-C_DocType-1010599">1010599</newValue>
+</column>
+<column name="Created" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 23:02:24.872</newValue>
+</column>
+<column name="CreatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>1010717</newValue>
+</column>
+<column name="IsActive" type="20">
+<oldValue>null</oldValue>
+<newValue>Y</newValue>
+</column>
+<column name="IsTranslated" type="20">
+<oldValue>null</oldValue>
+<newValue>N</newValue>
+</column>
+<column name="Name" type="10">
+<oldValue>null</oldValue>
+<newValue>Nota de debito de proveedor</newValue>
+</column>
+<column name="PrintName" type="10">
+<oldValue>null</oldValue>
+<newValue>Nota de débito</newValue>
+</column>
+<column name="Updated" type="16">
+<oldValue>null</oldValue>
+<newValue>2015-05-06 23:02:24.872</newValue>
+</column>
+<column name="UpdatedBy" type="18">
+<oldValue>null</oldValue>
+<newValue>1010717</newValue>
+</column>
+</changegroup>
+</changelog>
