@@ -72,12 +72,12 @@ public class ExportaCITI extends SvrProcess {
                 ;
             } else if( name.equalsIgnoreCase( "FechaDesde" )) {
                 date_from = ( Timestamp )para[ i ].getParameter();
-            } else if( name.equalsIgnoreCase( "Fecha Hasta" )) {
+            } else if( name.equalsIgnoreCase( "FechaHasta" )) {
                 date_to = ( Timestamp )para[ i ].getParameter();
-            } else if( name.equalsIgnoreCase( "transaction" )) {
+            } else if( name.equalsIgnoreCase( "TipoTrans" )) {
             	transaction = (String)para[ i ].getParameter();
             } else if( name.equalsIgnoreCase( "Secuencia" )) {
-	            secuencia = para[ i ].getParameter().toString();
+        	secuencia = para[ i ].getParameter().toString();
             } else if( name.equalsIgnoreCase( "Directorio" )) {
             	directorio = (String)para[ i ].getParameter();
             } else {
@@ -91,7 +91,7 @@ public class ExportaCITI extends SvrProcess {
 		
 		File targetDir = new File (directorio);
 		if (!targetDir.exists())
-				targetDir.mkdir();
+			targetDir.mkdir();
 		
 		String cabecera = directorio + "/REGINFO_CV_CABECERA.txt";
 		String archivo_cbte = directorio + "/REGINFO_CV_" + (transaction.equalsIgnoreCase("V") ? "COMPRAS":"VENTAS")  + "_CBTE.txt";
@@ -106,8 +106,8 @@ public class ExportaCITI extends SvrProcess {
  		{
  			long inicia = System.currentTimeMillis();
  			
- 			sql = getSql();	        	         	 		
- 			pstmt = DB.prepareStatement(sql);			
+ 			sql = getSql();
+ 			pstmt = DB.prepareStatement(sql);
  			pstmt.setTimestamp(1, date_from);
  			pstmt.setTimestamp(2, date_to);
  			pstmt.setString(3, (transaction.equalsIgnoreCase("V")?"N":"Y"));
@@ -209,9 +209,9 @@ public class ExportaCITI extends SvrProcess {
  				s.append(pad(getCnvAmt(rs.getDouble(10)), 15, true));			// NG
  				s.append(pad(alic.get(rs.getDouble(14)), 4, true));				// Alícuota de IVA
  				s.append(pad(getCnvAmt(rs.getDouble(11)), 15, true));			// IVA liquidado
- 				//s.append(lineSeparator);
+ 				s.append(lineSeparator);
  				fw_a.write(s.toString());
- 				fw_a.write("\r");
+ 				//fw_a.write("\r");
  				q_alic++;
  				s = null;
 			}
@@ -256,8 +256,9 @@ public class ExportaCITI extends SvrProcess {
 				c.append(pad(getCnvAmt(ot), 15, true));
 				// TODO: dar soporte para comisiones de corredores
 				c.append("00000000000                              000000000000000");
+				c.append(lineSeparator);
  				fw_c.write(c.toString());
- 				fw_c.write("\r");
+ 				//fw_c.write("\r");
  				c = null;
 			}
 			
