@@ -10,5 +10,8 @@ También se deben actualizar las facturas que se hayan cargado antes de la insta
 que se trate. A tal fin se provee un proceso que hace la actualización. Todos los c_invoices que se creen después de instalado el plugin incorporarán
 el código de forma automática.
 
+Los archivos install.xml, postinstall.xml y preinstal.sql contienen las modificaciones a las tablas y diccionario de datos necesarios, tal como los
+genera el exportador de de plugins de Libertya.
+
 Juan Manuel Martínez - 2015
 jmmartinezsf@gmail.com
