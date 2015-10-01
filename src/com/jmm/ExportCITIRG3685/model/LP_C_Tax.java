@@ -8,7 +8,7 @@ import java.math.*;
 import org.openXpertya.util.*;
 /** Modelo Generado por C_Tax
  *  @author Comunidad de Desarrollo Libertya*         *Basado en Codigo Original Modificado, Revisado y Optimizado de:*         * Jorg Janke 
- *  @version  - 2015-05-06 22:00:57.345 */
+ *  @version  - 2015-09-23 14:00:25.659 */
 public class LP_C_Tax extends org.openXpertya.model.MTax
 {
 /** Constructor estándar */
@@ -30,36 +30,36 @@ public String toString()
 StringBuffer sb = new StringBuffer ("LP_C_Tax[").append(getID()).append("]");
 return sb.toString();
 }
-public static final int CATCITIRG3685_AD_Reference_ID = MReference.getReferenceID("CategoriaCITI");
-/** Crédito Fiscal = CRF */
-public static final String CATCITIRG3685_CréditoFiscal = "CRF";
-/** Exento = EXE */
-public static final String CATCITIRG3685_Exento = "EXE";
-/** Otros tributos = OTR */
-public static final String CATCITIRG3685_OtrosTributos = "OTR";
+public static final int CITIRG3685_AD_Reference_ID = MReference.getReferenceID("CatCITIRG3685");
+/** Crédito o Débito Fiscal = CDF */
+public static final String CITIRG3685_CréditoODébitoFiscal = "CDF";
 /** Percepciones de IVA = PIV */
-public static final String CATCITIRG3685_PercepcionesDeIVA = "PIV";
+public static final String CITIRG3685_PercepcionesDeIVA = "PIV";
 /** Percepciones de Ingresos Brutos = PIB */
-public static final String CATCITIRG3685_PercepcionesDeIngresosBrutos = "PIB";
-/** Percepciones de impuestos municipales = PMN */
-public static final String CATCITIRG3685_PercepcionesDeImpuestosMunicipales = "PMN";
-/** Percepciones de impuestos nacionales = PNC */
-public static final String CATCITIRG3685_PercepcionesDeImpuestosNacionales = "PNC";
-/** Set catCITIRG3685 */
-public void setcatCITIRG3685 (String catCITIRG3685)
+public static final String CITIRG3685_PercepcionesDeIngresosBrutos = "PIB";
+/** Percepciones Nacionales = PNC */
+public static final String CITIRG3685_PercepcionesNacionales = "PNC";
+/** Percepciones Municipales = PMN */
+public static final String CITIRG3685_PercepcionesMunicipales = "PMN";
+/** Otros Impuestos = OTR */
+public static final String CITIRG3685_OtrosImpuestos = "OTR";
+/** Exento = EXE */
+public static final String CITIRG3685_Exento = "EXE";
+/** Set Categoría para CITI RG3685 */
+public void setcitiRG3685 (String citiRG3685)
 {
-if (catCITIRG3685 == null || catCITIRG3685.equals("CRF") || catCITIRG3685.equals("EXE") || catCITIRG3685.equals("OTR") || catCITIRG3685.equals("PIV") || catCITIRG3685.equals("PIB") || catCITIRG3685.equals("PMN") || catCITIRG3685.equals("PNC"));
- else throw new IllegalArgumentException ("catCITIRG3685 Invalid value - Reference = CATCITIRG3685_AD_Reference_ID - CRF - EXE - OTR - PIV - PIB - PMN - PNC");
-if (catCITIRG3685 != null && catCITIRG3685.length() > 3)
+if (citiRG3685 == null || citiRG3685.equals("CDF") || citiRG3685.equals("PIV") || citiRG3685.equals("PIB") || citiRG3685.equals("PNC") || citiRG3685.equals("PMN") || citiRG3685.equals("OTR") || citiRG3685.equals("EXE"));
+ else throw new IllegalArgumentException ("citiRG3685 Invalid value - Reference = CITIRG3685_AD_Reference_ID - CDF - PIV - PIB - PNC - PMN - OTR - EXE");
+if (citiRG3685 != null && citiRG3685.length() > 3)
 {
 log.warning("Length > 3 - truncated");
-catCITIRG3685 = catCITIRG3685.substring(0,3);
+citiRG3685 = citiRG3685.substring(0,3);
 }
-set_Value ("catCITIRG3685", catCITIRG3685);
+set_Value ("citiRG3685", citiRG3685);
 }
-/** Get catCITIRG3685 */
-public String getcatCITIRG3685() 
+/** Get Categoría para CITI RG3685 */
+public String getcitiRG3685() 
 {
-return (String)get_Value("catCITIRG3685");
+return (String)get_Value("citiRG3685");
 }
 }

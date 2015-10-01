@@ -6,8 +6,8 @@
 ---------- Nuevas columnas en tablas y/o vistas 
 ----------------------------------------------------------------------
 
-ALTER TABLE C_Tax ADD COLUMN catcitirg3685 character(3);
-ALTER TABLE C_Invoice ADD COLUMN afipdoctype character varying(3);
+ALTER TABLE C_Invoice ADD COLUMN afipdoctype character(3);
+ALTER TABLE C_Tax ADD COLUMN citirg3685 character(3);
 ----------------------------------------------------------------------
 ---------- Modificación de tablas y/o vistas
 ----------------------------------------------------------------------

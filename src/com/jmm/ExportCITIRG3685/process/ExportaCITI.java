@@ -3,7 +3,7 @@
  * Diseño de los registros: http://www.afip.gob.ar/comprasyventas/
  * 
  * Autor: Juan Manuel Martínez - jmmartinezsf@gmail.com
- * Versión 0.1 - mayo de 2015
+ * Versión 0.1 - septiembre de 2015
  * 
  */
 
@@ -38,10 +38,6 @@ public class ExportaCITI extends SvrProcess {
 	public ExportaCITI() {
 		super();
 
-		alic.put(0.00, "3");
-		alic.put(10.50, "4");
-		alic.put(21.00, "5");
-		alic.put(27.00, "6");
 		cf = new Double(0);
 		p_iva = new Double(0);
 		p_iibb = new Double(0);
@@ -54,12 +50,10 @@ public class ExportaCITI extends SvrProcess {
     private Timestamp date_from;
     private Timestamp date_to;
     private String transaction;
-    private String secuencia;
     private String directorio="";
-    private  ResultSet rs = null;
-    Map<Double,String> alic = new HashMap<Double, String>();
+    private ResultSet rs = null;
 	private Double cf, p_iva, p_iibb, p_nac, p_mun, ot, ex; 
-	
+	private int invoice_id;
 	protected void prepare() {
 		
 		ProcessInfoParameter[] para = getParameter();
@@ -76,8 +70,6 @@ public class ExportaCITI extends SvrProcess {
                 date_to = ( Timestamp )para[ i ].getParameter();
             } else if( name.equalsIgnoreCase( "TipoTrans" )) {
             	transaction = (String)para[ i ].getParameter();
-            } else if( name.equalsIgnoreCase( "Secuencia" )) {
-        	secuencia = para[ i ].getParameter().toString();
             } else if( name.equalsIgnoreCase( "Directorio" )) {
             	directorio = (String)para[ i ].getParameter();
             } else {
@@ -92,8 +84,7 @@ public class ExportaCITI extends SvrProcess {
 		File targetDir = new File (directorio);
 		if (!targetDir.exists())
 			targetDir.mkdir();
-		
-		String cabecera = directorio + "/REGINFO_CV_CABECERA.txt";
+		//String cabecera = directorio + "/REGINFO_CV_CABECERA.txt";
 		String archivo_cbte = directorio + "/REGINFO_CV_" + (transaction.equalsIgnoreCase("V") ? "COMPRAS":"VENTAS")  + "_CBTE.txt";
 		String archivo_alic = directorio + "/REGINFO_CV_" + (transaction.equalsIgnoreCase("V") ? "COMPRAS":"VENTAS")  + "_ALICUOTAS.txt";
 		String result ="";
@@ -107,7 +98,11 @@ public class ExportaCITI extends SvrProcess {
  			long inicia = System.currentTimeMillis();
  			
  			sql = getSql();
- 			pstmt = DB.prepareStatement(sql);
+ 			/*
+ 			 * Necesito poder navegar hacia adelante y atrás en el resulset, por eso creo de esta manera
+ 			 * el preparedstatement.
+ 			 */
+ 			pstmt = DB.getConnectionRW().prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
  			pstmt.setTimestamp(1, date_from);
  			pstmt.setTimestamp(2, date_to);
  			pstmt.setString(3, (transaction.equalsIgnoreCase("V")?"N":"Y"));
@@ -115,7 +110,7 @@ public class ExportaCITI extends SvrProcess {
  			
  			cbtes = new FileWriter(archivo_cbte);
  			alic = new FileWriter(archivo_alic);
- 			int Q = creaArchivos(cbtes, alic);//, rs);
+ 			int Q = creaArchivos(cbtes, alic);
  			cbtes.close();
  			alic.close();
 		
@@ -144,10 +139,10 @@ public class ExportaCITI extends SvrProcess {
  		return result;
 	}				
 	
-	private int creaArchivos(FileWriter fw_c , FileWriter fw_a/*, ResultSet rs*/) throws IOException, SQLException
+	private int creaArchivos(FileWriter fw_c , FileWriter fw_a) throws IOException, SQLException
 	{
 		String lineSeparator = System.getProperty("line.separator");
-		int invoice_id = 0;
+		//int invoice_id = 0;
 		int cant = 0;
 		int q_alic = 0;
 		StringBuffer s; // linea de alícuotas
@@ -161,6 +156,7 @@ public class ExportaCITI extends SvrProcess {
 		String total = new String();
 		String moneda = new String();
 		String rz = new String();
+		String letra = new String();
 		/*
 		 1 inv.c_invoice_id
 		 2 inv.dateacct::date
@@ -175,20 +171,20 @@ public class ExportaCITI extends SvrProcess {
 		 11 itax.taxamt
 		 12 cur.wsfecode
 		 13 tax.c_cat_citi_id
-		 14 tax.rate"
+		 14 tax.rate
+		 15 ltr.letra
+		 16 tax.wsfecode
 		 */
-
+		
 		while(rs.next())
 		{
 			/* 
-			 * Primero genero las líneas de las alícuotas y voy generando las sumas totalizadoras del
-			 * informe por comprobante, que va en un archivo separado
+			 * Primero genero las líneas de las alícuotas y voy calculando las sumas totalizadoras del
+			 * informe por comprobante, que va en un archivo separado.
 			*/
 			log.log(Level.SEVERE,"Invoice_id" + rs.getInt(1));
-			q_alic = 0;
-			s = new StringBuffer();
 			fecha = getDate(rs.getDate(3));
-			tipo_comp = rs.getString(4);
+			tipo_comp = pad(rs.getString(4), 3, true);
 			pv = pad(rs.getString(5).substring(1, 5), 5, true);
 			nro = pad(rs.getString(5).substring(6, 13), 20, true);
 			cod_doc = rs.getString(6);
@@ -196,45 +192,69 @@ public class ExportaCITI extends SvrProcess {
 			total = pad(getCnvAmt(rs.getDouble(9)), 15, true);
 			moneda = rs.getString(12);
 			rz = pad(rs.getString(8).toUpperCase(), 30, false);
+			letra = rs.getString(15);			
 
-			if (esCreditoFiscal(rs.getString(13))){
- 				s.append(tipo_comp);
- 				s.append(pv);
+			if (letra.equalsIgnoreCase("A") || letra.equalsIgnoreCase("B") ||letra.equalsIgnoreCase("M") || esOtros(tipo_comp)){ 
+				s = new StringBuffer();
+				s.append(tipo_comp);
+ 				if (esOtros(tipo_comp))
+ 	 				s.append("00000");
+ 				else
+ 	 				s.append(pv);
  				s.append(nro);
- 				// los campos 6 y 7 no van para informes de ventas
- 				if (transaction.equalsIgnoreCase("V")){
+ 				if (transaction.equalsIgnoreCase("V")){			// los campos 6 y 7 no van para informes de ventas
  					s.append(cod_doc);
  					s.append(nro_doc);
  				}
- 				s.append(pad(getCnvAmt(rs.getDouble(10)), 15, true));			// NG
- 				s.append(pad(alic.get(rs.getDouble(14)), 4, true));				// Alícuota de IVA
- 				s.append(pad(getCnvAmt(rs.getDouble(11)), 15, true));			// IVA liquidado
- 				s.append(lineSeparator);
- 				fw_a.write(s.toString());
- 				//fw_a.write("\r");
- 				q_alic++;
- 				s = null;
+
+				if (esCreditoDebitoFiscal(rs.getString(13))){
+	 				s.append(pad(getCnvAmt(rs.getDouble(10)), 15, true));		// NG
+	 				s.append(pad(rs.getString(16), 4, true));					// Alícuota de IVA
+	 				s.append(pad(getCnvAmt(rs.getDouble(11)), 15, true));		// IVA liquidado
+	 				q_alic++;
+	 				s.append(lineSeparator);
+	 				fw_a.write(s.toString());
+				}else{															// Montos no gravados en Fac A o M 
+					if (cf == 0.0 && rs.getString(13).equalsIgnoreCase("EXE")){
+						s.append(pad(getCnvAmt(rs.getDouble(10)), 15, true));	// Monto no gravado
+						s.append(pad(rs.getString(16), 4, true));				// Alícuota de IVA
+		 				s.append(pad("0", 15, true));
+		 				q_alic++;
+		 				s.append(lineSeparator);
+		 				fw_a.write(s.toString());
+					}
+				}
+				s = null;
+				//fw_a.write("\r");
 			}
+			
 			/*
-			 * Si acumulaImportes devuelve falso y no es la primera línea que se procesa, es porque la línea
-			 * actual es de otro comprobante por lo que debo generar la línea del comprobante. Lo mismo si es la
-			 * última línea del rs
+			 * AcumulaImportes agrega los montos de impuestos a cada variable. Si devuelve verdadero, es porque
+			 * la próxima línea es de otro comprobante por lo que debo generar la línea del comprobante. Lo mismo
+			 * ocurre si es la última línea del rs.
 			 */
-			if ((!acumulaImportes(invoice_id) && !rs.isFirst()) || rs.isLast()){
+			if (acumulaImportes(rs.getInt(1)) || rs.isLast()){
 				c = new StringBuffer();
 				c.append(fecha);
 				c.append(tipo_comp);
-				c.append(pv);
+				if (esOtros(tipo_comp))
+					c.append("00000");
+				else
+					c.append(pv);
 				c.append(nro);
-				// TODO: las importaciones no están soportadas por esta versión.
-				c.append("                "); 
+				if (transaction.equalsIgnoreCase("V"))
+					// TODO: las importaciones no están soportadas por esta versión.
+					c.append("                ");
+				else
+					c.append(nro);
 				c.append(cod_doc);
 				c.append(nro_doc);
 				c.append(rz);
 				c.append(total);
 				// TODO: no se discriminan conceptos no gravados de exentos en esta versión.
 				c.append("000000000000000");
-				if (rs.getString(5).substring(0, 1).equalsIgnoreCase("C"))
+				if (letra.equalsIgnoreCase("C") || letra.equalsIgnoreCase("B") ||
+						((letra.equalsIgnoreCase("A") || esOtros(tipo_comp)) && cf == 0.0))
 					c.append("000000000000000");
 				else
 					c.append(pad(getCnvAmt(ex), 15, true));
@@ -248,25 +268,29 @@ public class ExportaCITI extends SvrProcess {
 				c.append(moneda);
 				c.append("0001000000");
 				c.append(q_alic);
-				if (rs.getString(5).substring(0, 1).equalsIgnoreCase("C"))
+				if ((letra.equalsIgnoreCase("A") || esOtros(tipo_comp)) && cf == 0.0)
 					c.append("E");
 				else
 					c.append("0");
-				c.append(pad(getCnvAmt(cf), 15, true));
+				if (transaction.equalsIgnoreCase("V"))
+					c.append(pad(getCnvAmt(cf), 15, true));
 				c.append(pad(getCnvAmt(ot), 15, true));
-				// TODO: dar soporte para comisiones de corredores
-				c.append("00000000000                              000000000000000");
+				if (transaction.equalsIgnoreCase("V"))
+					// TODO: dar soporte para comisiones de corredores
+					c.append("00000000000                              000000000000000");
+				if (!transaction.equalsIgnoreCase("V"))
+					c.append(fecha);
 				c.append(lineSeparator);
  				fw_c.write(c.toString());
  				//fw_c.write("\r");
  				c = null;
+ 				q_alic = 0;
 			}
 			
 			/*
 			 * Guardo el  invoice_id del comprobante por que si en la próxima línea del rs 
 			 * el invoice_id tiene el mismo valor entonces tengo que acumular los montos de impuestos.
 			 */
-			
 			invoice_id = rs.getInt(1);
 			cant++;
 		}
@@ -337,33 +361,47 @@ public class ExportaCITI extends SvrProcess {
     }
     
     /*
-     * Devuelve verdadero si el id del impuesto consultado corresponde a uno configurado como crédito fiscal
+     * Devuelve verdadero si el id del impuesto consultado corresponde a uno configurado 
+     * como crédito o débto fiscal
      */
-    private Boolean esCreditoFiscal(String id){
-    	return id.trim().equalsIgnoreCase("CRF");
+    private Boolean esCreditoDebitoFiscal(String id){
+    	return id.trim().equalsIgnoreCase("CDF");
+    }
+    
+    /*
+     * Devuelve verdadero si el tipo de comprobante es "Otros comprobantes" u "Otros comprobantes - credito".
+     */
+    private Boolean esOtros(String tipo){
+    	return (tipo.equals("090") || tipo.equals("099"));
     }
     
     /*
      * Acumula los importes de las líneas de cada factura.
      * Devuelve:
-     *   true si la línea actual corresponde a la misma factura que la anterior
+     *   true si la próxima línea del rs corresponde a la misma factura que la actual línea
      *   false en caso contrario
      */
     private Boolean acumulaImportes(int id) throws SQLException{
-		/*
+    	
+    	Boolean ret = false;
+
+    	/*
 		 * Chequeo si el invoice_id de ésta línea es el mismo que el que está guardado y reseteo los montos
 		 * de impuestos de ser necesario
 		 */
-    	
-    	Boolean ret = true;
-    	
-		if (id != rs.getInt(1)){
+		if (invoice_id != rs.getInt(1))
 			borraImpuestos();
-			ret = false;
-		}
 
+		if (rs.isLast()) // Si estoy en la última línea, devuelvo true para que se guarde el comprobante.
+    		ret = true;
+		else{
+	    	rs.next();
+	    	ret = !(rs.getInt(1) == id);
+	    	rs.previous();
+		}
+		
 		String v = rs.getString(13).trim();
-		if (v.equalsIgnoreCase("CRF"))
+		if (v.equalsIgnoreCase("CDF"))
 			cf +=rs.getDouble(11);
 		else if (v.equalsIgnoreCase("PIV"))
 			p_iva += rs.getDouble(11);
@@ -377,27 +415,29 @@ public class ExportaCITI extends SvrProcess {
 			ot += rs.getDouble(11);
 		else if (v.equalsIgnoreCase("EXE"))
 			ex += rs.getDouble(10);
-			
+		
 		return ret;
     }
     
 	private String getSql()
 	{
 		StringBuffer sql = new StringBuffer();
-		sql.append("select inv.c_invoice_id, inv.dateacct::date, inv.dateinvoiced::date, inv.afipdoctype, inv.documentno, bp.taxidtype, ");
-		sql.append("bp.taxid, bp.name, inv.grandtotal, itax.taxbaseamt, itax.taxamt, cur.wsfecode, tax.catcitirg3685, to_char(tax.rate, '90.00') ");
+		sql.append("select inv.c_invoice_id, inv.dateacct::date, inv.dateinvoiced::date, inv.afipdoctype, inv.documentno, COALESCE(bp.taxidtype, '99'), ");
+		sql.append("COALESCE(bp.taxid, inv.nroidentificcliente), bp.name, inv.grandtotal, itax.taxbaseamt, itax.taxamt, cur.wsfecode, tax.citirg3685, to_char(tax.rate, '90.00'), ");
+		sql.append("ltr.letra, tax.WSFEcode ");
 		sql.append("from libertya.c_invoicetax itax ");
 		sql.append("join libertya.c_invoice inv on itax.c_invoice_id = inv.c_invoice_id ");
 		sql.append("join libertya.c_doctype dt on inv.c_doctype_id = dt.c_doctype_id ");
 		sql.append("join libertya.c_bpartner bp on inv.c_bpartner_id = bp.c_bpartner_id ");
 		sql.append("join libertya.c_currency cur on inv.c_currency_id = cur.c_currency_id ");
 		sql.append("join libertya.c_tax tax on itax.c_tax_id = tax.c_tax_id ");
+		sql.append("join libertya.c_letra_comprobante ltr on inv.c_letra_comprobante_id = ltr.c_letra_comprobante_id ");
 		sql.append("where inv.dateacct between ? and ? and ");
 		sql.append("inv.c_doctype_id not in (1010517, 1010518, 1010519, 1010520) ");
 		sql.append("and inv.docstatus = 'CO' ");
 		sql.append("and inv.issotrx = ? ");
 		sql.append("order by ");
-		sql.append("inv.dateinvoiced asc, bp.name, inv.documentno");
+		sql.append("inv.dateinvoiced asc, bp.name, inv.documentno, tax.citirg3685");
 		return sql.toString();
 	}
 }
